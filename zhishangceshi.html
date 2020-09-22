@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智商测试</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #zhishang {
+            width: 2.8rem;
+            height: 1.5rem;
+            display: block;
+            background-color: rgb(250, 242, 242);
+            margin: auto;
+            position: relative;
+            transform: translateY(1rem);
+            border-radius: 0.04rem;
+            display: none;
+            font-size: 0.1rem;
+            overflow: hidden;
+        }
+        #gongxi,#guanbi{
+            width: 2.8rem;
+            height: 1.5rem;
+            display: block;
+            background-color: rgb(250, 242, 242);
+            margin: auto;
+            position: relative;
+            transform: translateY(1rem);
+            border-radius: 0.04rem;
+            display: none;
+            font-size: 0.1rem;
+            overflow: hidden;
+            text-align: center;
+            line-height: 1.5rem;
+        }
+        #btn {
+            display: block;
+            margin: 1rem auto;
+        }
+
+        .wenju {
+            font-size: 0.15rem;
+            margin-top: 0.3rem;
+            padding-left: 0.2rem;
+        }
+
+        .button {
+            width: 0.5rem;
+            height: 0.2rem;
+            border: #000 solid 1px;
+            text-align: center;
+            line-height: 0.2rem;
+            font-size: 0.12rem;
+            position: absolute;
+        }
+
+        #btnleft {
+            bottom: 0.1rem;
+            right: 0.8rem;
+        }
+
+        #btnright {
+            bottom: 0.1rem;
+            right: 0.1rem;
+        }
+        #closeBtn {
+            width: 0.3rem;
+            height: 0.3rem;
+        }
+        .closeBox{
+            width: 0.3rem;
+            height: 0.2rem;
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-radius: 0.04rem;
+        }
+        .closeBox:hover{
+            background-color: red;
+        }
+        .close {
+            position: relative;
+            margin: auto;
+            width: 0.1rem;
+            height: 0.1rem;
+            top: 0.05rem;
+            left: 0.15rem;
+        }
+
+        .close::before,
+        .close::after {
+            position: absolute;
+            content: ' ';
+            background-color: #000;
+            left: 0.05;
+            width: 1px;
+            height: 0.1rem;
+        }
+
+        .close::before {
+            transform: rotate(45deg);
+        }
+
+        .close::after {
+            transform: rotate(-45deg);
+        }
+    </style>
+    <script>
+        (function (doc, win) {
+            var docEl = doc.documentElement;
+            resizeEvt =
+                "orientationchange" in window ? "orientationchange" : "resize",
+                recalc = function () {
+                    // var clientWidth = doc.documentElement.clientWidth;
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 100 * (clientWidth / 320) + "px";
+                    // doc.getElementById("app").style.display = "block";
+                    console.log(docEl, docEl.style.fontSize, '1212121212121212121212121');
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener("DOMContentLoaded", recalc, false);
+        })(document, window);
+    </script>
+</head>
+
+<body>
+    <button id="btn" onclick="goceshi()">开始测试</button>
+    <div id="zhishang">
+        <p class="wenju">你是煞笔吗？</p>
+        <div id="btnleft" class="button" onclick="yesFun()">是</div>
+        <div id="btnright" class="button" onclick="noFun()">不是</div>
+        <div class="closeBox" onclick="closeBtn()">
+             <i class="close"></i>
+        </div>
+    </div>
+    <div id="gongxi">
+        恭喜你答对了！！！
+    </div>
+    <div id="guanbi">
+        关了你也不能改变你是煞笔的事实！！！
+    </div>
+</body>
+<script>
+    var zhishang = document.getElementById('zhishang');
+    var btn = document.getElementById('btn');
+    var btnleft = document.getElementById('btnleft');
+    var btnright = document.getElementById('btnright');
+    var gongxi = document.getElementById('gongxi');
+    let markNum = 0
+    console.log(zhishang);
+    var goceshi = function () {
+        showEle('zhishang')
+        noneEle('btn')
+    };
+    function yesFun() {
+        console.log(markNum)
+        switch(markNum){
+            case 3:
+            btnleft.innerText = '是';
+            btnright.innerText = '不是';
+            markNum=2
+            break;
+            case 0:
+            case 1:
+            case 2:
+            noneEle('zhishang')
+            showEle('gongxi');
+            break;
+        }
+    }
+    function noFun() {
+        switch(markNum){
+            case 0:
+            let bottom = 0.1;
+            let timer = setInterval(()=>{
+                if(bottom<0.6){
+                    bottom+=0.1;
+                    btnright.style.bottom = bottom+'rem';
+                }else{
+                    clearInterval(timer)
+                }
+            },50)
+            markNum++
+            break;
+            case 1:
+            let bottom1 = 0.6;
+            let timer1 = setInterval(()=>{
+                if(bottom1>0.1){
+                    bottom1-=0.1;
+                    btnright.style.bottom = bottom1+'rem';
+                }else{
+                    btnright.style.bottom = 0.1+'rem';
+                    clearInterval(timer1)
+                }
+            },50);
+            markNum++
+            break;
+            case 2:
+            btnleft.innerText = '不是';
+            btnright.innerText = '是';
+            markNum =3
+            break;
+            case 3:
+            noneEle('zhishang')
+            showEle('gongxi');
+            break;
+        }
+    }
+    function closeBtn() {
+        console.log('jinruclose')
+        noneEle('zhishang');
+        showEle('guanbi')
+    }
+    function showEle(...arg) {
+        console.log(arg)
+        arg.forEach((item) => {
+            console.log(window[item]);
+            window[item].style.display = 'block'
+        })
+    }
+    function noneEle(...arg) {
+        console.log(arg)
+        arg.forEach((item) => {
+            console.log(window[item]);
+            window[item].style.display = 'none'
+        })
+    }
+</script>
+
+</html>
