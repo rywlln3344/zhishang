@@ -10,11 +10,11 @@
     <div id="map">
         <div id="nanduxuanze">
             <p>！！！难度选择！！！</p>
-            <div class="jiandan" onclick="gospeed(1000)">新手</div>
-            <div class="jiandan" onclick="gospeed(300)">高手</div>
-            <div class="jiandan" onclick="gospeed(200)">老手</div>
-            <div class="jiandan" onclick="gospeed(100)">大神</div>
-            <div class="jiandan" onclick="gospeed(20)">地狱</div>
+            <div class="jiandan" onclick="gospeed(1000,230)">新手</div>
+            <div class="jiandan" onclick="gospeed(300,180)">高手</div>
+            <div class="jiandan" onclick="gospeed(200,100)">老手</div>
+            <div class="jiandan" onclick="gospeed(100,30)">大神</div>
+            <div class="jiandan" onclick="gospeed(50,5)">地狱</div>
         </div>
         <div id="gameOver">
             <p>！！！游戏结束！！！</p>
@@ -24,7 +24,7 @@
             ！！！恭喜通关！！！
         </div>
         <canvas id="snake" width="360px" height="260px" style="border: black solid 1px;"></canvas>
-        <div id="controlBox">
+        <div id="controlBox" style="display: none;">
             <span class="moveUp btnCom" onclick="moveUp()">
                 上
             </span>
@@ -38,6 +38,9 @@
                 右
             </span>
         </div>
+            <div id="controlArea">
+                <div id="control"></div>
+            </div>
     </div>
 </body>
 <script src="./js/snake1.js"></script>

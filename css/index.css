@@ -99,3 +99,22 @@ html,body{
     color: white;
     line-height: 260px;
 }
+
+#controlArea{
+    width: 100px;
+    height: 100px;
+    background-color: darkorange;
+    margin: auto;
+    position: relative;
+    margin-top: 150px;
+}
+#controlArea #control{
+    width: 30px;
+    height: 30px;
+    background-color: darkseagreen;
+    border-radius: 25px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%)
+}
